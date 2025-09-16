@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AQUAVINA</title>
+  <style>
+    body {margin:0; font-family: Arial, sans-serif; background:#f5f5f5;}
+    header {background:#232f3e; color:#fff; padding:10px 20px; display:flex; justify-content:space-between; align-items:center;}
+    header .logo {font-weight:bold; font-size:20px;}
+    .search-box {display:flex; align-items:center;}
+    .search-box input {padding:6px; width:300px; border:none; border-radius:4px 0 0 4px;}
+    .search-box button {padding:6px 10px; border:none; background:#febd69; cursor:pointer; border-radius:0 4px 4px 0;}
+    .search-box button:hover {background:#f90;}
+    nav {background:#131921; color:#fff; padding:8px 20px;}
+    nav a {color:#fff; margin-right:15px; text-decoration:none;}
+    main {padding:20px; max-width:1200px; margin:auto; display:flex; gap:20px;}
+    .sidebar {width:200px; background:#fff; padding:15px; border-radius:6px; height:fit-content;}
+    .sidebar h3 {margin-top:0;}
+    .sidebar ul {list-style:none; padding:0;}
+    .sidebar li {margin:8px 0; cursor:pointer; color:#007185;}
+    .sidebar li:hover {text-decoration:underline;}
+    .content {flex:1;}
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+    .category-box {
+      background:#fff; border-radius:6px; padding:15px; text-align:center; cursor:pointer;
+      transition:transform 0.2s;
+    }
+    .category-box:hover {transform:scale(1.03);}
+    .category-box h3 {margin:0 0 10px; font-size:16px;}
+    .category-box img {width:100%; height:160px; object-fit:cover; border-radius:6px;}
+    .category-box a {display:block; margin-top:10px; color:#007185; font-size:14px; text-decoration:none;}
+    .category-box a:hover {text-decoration:underline;}
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .card {background:#fff; padding:12px; border-radius:6px; text-align:center;}
+    .card img {width:100%; height:150px; object-fit:contain;}
+    .card .title {font-weight:bold; margin:8px 0;}
+    .card .price {color:#b12704; font-weight:bold;}
+    .btn {background:#ffd814; border:none; padding:8px; border-radius:4px; cursor:pointer; margin-top:8px;}
+    .btn:hover {background:#f7ca00;}
+    footer {
+      background:#111; color:#ccc; text-align:center; padding:16px;
+      position: fixed; bottom: 0; left: 0; width: 100%; z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">AQUAVINA</div>
+    <div class="search-box">
+      <input type="search" id="searchInput" placeholder="Tìm sản phẩm...">
+      <button onclick="searchProduct()">🔍</button>
+    </div>
+    <div>
+  <a href="giohang.html" id="cartLink" 
+     style="color:#fff; text-decoration:none; display:flex; align-items:center; gap:5px;">
+    <img src="https://img.lovepik.com/element/40148/6831.png_860.png" 
+         alt="Giỏ hàng" 
+         style="width:20px; height:20px;">
+    Giỏ hàng (0)
+  </a>
+</div>
+
+    <!-- link giỏ hàng -->
+  </header>
+  <nav align="center">           <!--link taskbar -->
+    <a href="sanpham.html">Sản phẩm</a>
+    <a href="khuyenmai.html">Khuyến mãi</a>
+    <a href="lienhe.html">Liên hệ</a>
+    <a href="login.html">Đăng nhập</a>
+    <a href="register.html">Đăng ký</a>
+  </nav>
+  <main>
+    <aside class="sidebar">
+      <h3>Nhóm sản phẩm</h3>
+      <ul>
+        <li onclick="filterCategory('all')">Tất cả</li>
+        <li onclick="filterCategory('electronics')">Trò chơi điện tử</li>
+        <li onclick="filterCategory('clothes')">Quần áo</li>
+        <li onclick="filterCategory('books')">Sách</li>
+        <li onclick="filterCategory('home')">Đồ gia dụng</li>
+      </ul>
+    </aside>
+
+    <div class="content">
+      <div class="category-grid">
+        <div class="category-box" onclick="filterCategory('electronics')">
+          <h3>Get your game on</h3>
+          <img src="https://pos.nvncdn.com/9af890-179840/ps/20241031_AhCu5PV26a.jpeg?v=1730345406" alt="gaming">
+          <a href="javascript:void(0)">Shop gaming</a>
+        </div>
+        <div class="category-box" onclick="filterCategory('clothes')">
+          <h3>Thời trang xu hướng</h3>
+          <img src="https://pos.nvncdn.com/f4d87e-8901/ps/20241220_ududMsXuKI.jpeg" alt="fashion">
+          <a href="javascript:void(0)">See all deals</a>
+        </div>
+        <div class="category-box" onclick="filterCategory('books')">
+          <h3>Đọc sách hay</h3>
+          <img src="https://cdn.tgdd.vn/2021/05/CookProduct/thumb1-1200x676-2.jpg" alt="books">
+          <a href="javascript:void(0)">Mua sách</a>
+        </div>
+        <div class="category-box" onclick="filterCategory('home')">
+          <h3>Đồ gia dụng</h3>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVvvN3uUBXW7HVl1KXzzJpytE96cKBg_4IZg&s" alt="home">
+          <a href="javascript:void(0)">Khám phá ngay</a>
+        </div>
+      </div>
+
+      <h2>Sản phẩm nổi bật</h2>
+      <div class="product-grid" id="productGrid">
+        <div class="card" data-category="electronics">
+          <img src="https://pos.nvncdn.com/9af890-179840/ps/20241031_AhCu5PV26a.jpeg?v=1730345406" alt="ps5">
+          <div class="title">Máy chơi game PS5</div>
+          <div class="price">₫13.999.000</div>
+          <button class="btn">Thêm vào giỏ</button>
+        </div>
+        <div class="card" data-category="electronics">
+          <img src="https://media.loveitopcdn.com/211/thumb/ugreen-35758-10.jpg" alt="tai nghe">
+          <div class="title">Tai nghe không dây</div>
+          <div class="price">₫1.200.000</div>
+          <button class="btn">Thêm vào giỏ</button>
+        </div>
+        <div class="card" data-category="home">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVvvN3uUBXW7HVl1KXzzJpytE96cKBg_4IZg&s" alt="may xay">
+          <div class="title">Máy xay sinh tố</div>
+          <div class="price">₫800.000</div>
+          <button class="btn">Thêm vào giỏ</button>
+        </div>
+        <div class="card" data-category="clothes">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaKLH226L8FceQeTTMFgVvVBdeitdqmVZCpg&s" alt="ao thun">
+          <div class="title">Áo thun nam</div>
+          <div class="price">₫199.000</div>
+          <button class="btn">Thêm vào giỏ</button>
+        </div>
+        <div class="card" data-category="clothes">
+          <img src="https://pos.nvncdn.com/f4d87e-8901/ps/20241220_ududMsXuKI.jpeg?v=1734680752" alt="giay">
+          <div class="title">Giày thể thao</div>
+          <div class="price">₫199.000</div>
+          <button class="btn">Thêm vào giỏ</button>
+        </div>
+        <div class="card" data-category="books">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHj9Zd8YjCRkTWtFLATUDwNs39WW-Iw1DxZw&s" alt="book">
+          <div class="title">Đắc Nhân Tâm</div>
+          <div class="price">₫49.000</div>
+          <button class="btn">Thêm vào giỏ</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © D12.48.04. Bài tập lớn. Nhóm 12
+  </footer>
+
+  <script>
+  function searchProduct() {
+    let input = document.getElementById("searchInput").value.toLowerCase();
+    let products = document.querySelectorAll(".product-grid .card");
+    products.forEach(p => {
+      let title = p.querySelector(".title").innerText.toLowerCase();
+      p.style.display = title.includes(input) ? "block" : "none";
+    });
+  }
+
+  function filterCategory(category) {
+    let products = document.querySelectorAll(".product-grid .card");
+    products.forEach(p => {
+      p.style.display = (category === "all" || p.dataset.category === category) ? "block" : "none";
+    });
+  }
+
+  // --- Xử lý giỏ hàng ---
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  function updateCartCount() {
+    document.getElementById("cartLink").innerHTML = `
+      <img src="https://img.lovepik.com/element/40148/6831.png_860.png" 
+           alt="Giỏ hàng" 
+           style="width:20px; height:20px;">
+      Giỏ hàng (${cart.length})
+    `;
+  }
+
+  function addToCart(name, price, img) {
+    cart.push({ name, price, img });
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartCount();
+    alert(name + " đã thêm vào giỏ!");
+  }
+
+  document.querySelectorAll(".card").forEach(card => {
+    let btn = card.querySelector(".btn");
+    btn.addEventListener("click", () => {
+      let name = card.querySelector(".title").innerText;
+      let price = card.querySelector(".price").innerText.replace(/[₫,.]/g, "");
+      let img = card.querySelector("img").src;
+      addToCart(name, parseInt(price), img);
+    });
+  });
+
+  updateCartCount();
+</script>
+
+  
+</body>
+
+</html>
